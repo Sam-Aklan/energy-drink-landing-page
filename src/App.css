@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+body{
+  width: 100;
+  max-width: 1440px;
+  height: 100vh;
+  min-height: 100vh;
+  margin-inline: auto;
+}
+
+#root {
+ width: 100%;
+}
+
