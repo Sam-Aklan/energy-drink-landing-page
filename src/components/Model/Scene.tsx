@@ -4,7 +4,7 @@ import { Model } from "./Model";
 const Scene = () => {
   return (
     <>
-      <OrbitControls />
+      <OrbitControls  enableZoom={false}/>
       <PerspectiveCamera
         makeDefault
         near={0.1}
@@ -12,6 +12,7 @@ const Scene = () => {
         position={[0, 0, 5]}
         fov={75}
         aspect={window.innerWidth / window.innerHeight}
+      
       />
       <Model/>
     </>

@@ -3,8 +3,8 @@ import * as THREE from 'three'
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
-import { ShaderMaterial } from '../shaders/ShaderMaterial'
-
+import { ShaderMaterial } from '../../shaders/ShaderMaterial'
+import { useFrame, useThree } from '@react-three/fiber'
 type GLTFResult = GLTF & {
   nodes: {
     Body_Material001_0: THREE.Mesh
@@ -17,9 +17,13 @@ type GLTFResult = GLTF & {
 }
 
 export function Model(props: React.JSX.IntrinsicElements['group']) {
+  const outerRef = React.useRef<THREE.Group>(null)
+  const innerRef = React.useRef<THREE.Group>(null)
+
+
+
   const gltf = useGLTF('/model/juice-can.glb') as unknown as GLTFResult
   const {nodes,materials,} = gltf
-  
   
   
   React.useEffect(()=>{
@@ -41,8 +45,14 @@ export function Model(props: React.JSX.IntrinsicElements['group']) {
       
     }
   },[gltf])
+  useFrame(({clock}) => {
+    if (outerRef.current && innerRef.current) {
+        // outerRef.current.position.y = Math.sin(clock.getElapsedTime()*2) *.1
+        innerRef.current.rotation.y = Math.PI /.875 + Math.sin(clock.getElapsedTime()) * .75
+    }
+  });
   return (
-    <group {...props} scale={.275}>
+    <group {...props} scale={.275} ref={outerRef} rotation={[0,Math.PI /2.5, 0]} >
 
 <ambientLight intensity={1} color="#ffffff" />
       
@@ -81,8 +91,8 @@ export function Model(props: React.JSX.IntrinsicElements['group']) {
       
      
      
-      <group rotation={[-Math.PI / 2, 0, 0]}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
+      <group rotation={[-Math.PI / 2, 0, 0]} >
+        <group  rotation={[Math.PI / 2, Math.PI / .99, 0]} ref={innerRef}>
           <mesh
             castShadow
             receiveShadow

@@ -65,7 +65,7 @@ export const ShaderMaterial = ({ material }: { material: THREE.MeshStandardMater
         'vec4 diffuseColor = vec4( diffuse, opacity );',
         `vec4 diffuseColor = vec4(diffuse, opacity);
         vec3 lightning = lightningEffect(vUv);
-        diffuseColor.rgb = mix(diffuseColor.rgb, lightning, uEffectIntensity);`
+        diffuseColor.rgb = mix(diffuseColor.rgb, lightning, uEffectIntensity * 1.2);`
       );
 
       material.userData.shader = shader;
