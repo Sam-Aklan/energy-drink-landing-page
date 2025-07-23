@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# file not to track
+
+src/components/Model/Model*.tsx
+src/components/Model/ModelWithShaderEffect.tsx
+
+src/shaders/ShaderMaterial*.tsx
+
+public/model/monster_white.glb
+public/model/monster_energy.glb
+public/model/energy_drink.glb
+public/model/juice-can.glb

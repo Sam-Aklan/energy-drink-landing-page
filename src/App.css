@@ -91,6 +91,7 @@ section {
   left:0;
   width: 100%;
   height: 100%;
+  background: #000;
   clip-path: circle(0% at 50% 50%);
 }
 
@@ -145,6 +146,7 @@ section {
 }
 
 .header-1 h1 .char > span,
+.tooltip .icon .ion-icon,
 .tooltip .title .line > span,
 .tooltip .description .line > span{
   position: relative;

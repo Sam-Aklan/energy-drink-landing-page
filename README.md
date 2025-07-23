@@ -5,8 +5,8 @@ https://www.shadertoy.com/view/tl2Xzd
 
 Energy Drink Model
 goes to
-funukemaguro
-https://sketchfab.com/3d-models/mega-crash-7days-to-die-2cd72f3214384234bf3a634cadb1818e
+dwalsh
+https://sketchfab.com/3d-models/energy-drink-game-ready-model-83676feb8b0a4589952cf3676299311b
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
