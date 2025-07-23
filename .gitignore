@@ -25,7 +25,7 @@ dist-ssr
 
 # file not to track
 
-src/components/Model/Model_.tsx
+src/components/Model/Model_*.tsx
 src/components/Model/ModelWithShaderEffect.tsx
 
 src/shaders/ShaderMaterial_*.tsx
