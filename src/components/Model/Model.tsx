@@ -7,10 +7,11 @@ Title: Palladium Energy Drink
 */
 
 import * as THREE from 'three'
-import React from 'react'
+import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
 import { ShaderMaterial } from '../../shaders/ShaderMaterial'
+import { useFrame } from '@react-three/fiber'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -33,6 +34,7 @@ type GLTFResult = GLTF & {
 }
 
 export function Model(props: React.JSX.IntrinsicElements['group']) {
+  const modelRef = useRef<THREE.Group>(null)
    const gltf = useGLTF('/model/palladium_energy_drink.glb') as unknown as GLTFResult
     const {materials,nodes} = gltf
       React.useEffect(()=>{
@@ -51,8 +53,13 @@ export function Model(props: React.JSX.IntrinsicElements['group']) {
           
         }
       },[gltf])
+      useFrame(({clock})=>{
+        if(modelRef.current){
+          modelRef.current.rotation.y = Math.sin(clock.getElapsedTime()) * .3
+        }
+      })
   return (
-    <group {...props} dispose={null} scale={.175} position={[0,-0.7,0]} >
+    <group {...props} dispose={null} scale={.175} position={[0,-0.7,0]} ref={modelRef} rotation={[0,0,0]}>
        {/* Main Lighting Setup */}
        <ambientLight intensity={0.5} />
       

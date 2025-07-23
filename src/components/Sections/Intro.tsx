@@ -77,7 +77,7 @@ const Intro = ({audioRef,hasPlayedOnce}:{audioRef: RefObject<HTMLAudioElement | 
     ScrollTrigger.create({
       trigger: ".product-overview",
       start:"top top",
-      end:`+=${window.innerHeight * 10}px`,
+      end:`+=${window.innerHeight * 8}px`,
       pin:true,
       pinSpacing:true,
       scrub:1,
@@ -113,7 +113,7 @@ const Intro = ({audioRef,hasPlayedOnce}:{audioRef: RefObject<HTMLAudioElement | 
         // sound animation
         // console.log("current progress",progress)
         setCurrentProgress(progress)
-        setTimeout(()=> setPreviousProgress(progress),500)
+        setTimeout(()=> setPreviousProgress(progress),800)
         if (audioRef.current && progress > 0 && currentProgress === previousProgress) {
           if(!audioRef.current.played.length || audioRef.current.ended)audioRef.current.play();
         
