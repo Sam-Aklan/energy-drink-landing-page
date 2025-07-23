@@ -122,7 +122,7 @@ export const ShaderMaterial = ({ material }: { material: THREE.MeshStandardMater
     
         setTimeout(() => {
           fadeOut();
-        }, 800);
+        }, 500);
       } else {
         effectIntensity.current = 0;
       }

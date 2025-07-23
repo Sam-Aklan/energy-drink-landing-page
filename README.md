@@ -1,12 +1,46 @@
-thunder bolt shader credit 
-goes to
- MarisaKirisame 
-https://www.shadertoy.com/view/tl2Xzd
+# ⚡ Energy Drink Landing Page
 
-Energy Drink Model
-goes to
-dwalsh
-https://sketchfab.com/3d-models/energy-drink-game-ready-model-83676feb8b0a4589952cf3676299311b
+An interactive 3D landing page built with **React**, **TypeScript**, **GSAP**, and **React Three Fiber** — showcasing a high-energy product experience.
+
+This project features:
+
+- ✨ Smooth **text animations** powered by GSAP.
+- 🥫 A detailed **3D model** of an energy drink can rendered using React Three Fiber.
+- ⚡ A dynamic **thunderbolt shader effect** applied to the can on scroll interaction.
+
+---
+
+## 🔧 Tech Stack
+
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [GSAP (GreenSock Animation Platform)](https://greensock.com/gsap/)
+- [React Three Fiber](https://docs.pmnd.rs/react-three-fiber/introduction)
+
+---
+
+## 🎬 Features
+
+- **Scroll-triggered animations** using GSAP and ScrollTrigger.
+- **3D Can Model** rendered with Three.js via React Three Fiber.
+- **Custom Shader Effect**: a lightning bolt visual effect that activates as the user scrolls — integrated with GLSL and applied dynamically to the can surface.
+
+---
+
+## 📸 Credits
+
+- **⚡ Thunderbolt Shader**  
+  Created by [MarisaKirisame](https://www.shadertoy.com/view/tl2Xzd)  
+  Shader source: [Shadertoy - Lightning](https://www.shadertoy.com/view/tl2Xzd)
+
+- **🥫 Energy Drink 3D Model**  
+  Provided by [palladiumenergydrink](https://sketchfab.com/palladiumenergydrink)  
+  Model link: [Sketchfab](https://sketchfab.com/3d-models/palladium-energy-drink-6cfa04ecb6694c138bdcb5bf105202fc)
+
+---
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
