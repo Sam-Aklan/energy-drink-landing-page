@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
+import { fragmentShaderFn } from './thunderBolt';
 
 export const ShaderMaterial = ({ material }: { material: THREE.MeshStandardMaterial }) => {
   const { size } = useThree();
@@ -72,42 +73,8 @@ export const ShaderMaterial = ({ material }: { material: THREE.MeshStandardMater
           varying vec3 vNormal12;
           varying vec3 vViewPosition12;
         
-          
-         // Rotate UV coordinates by 90 degrees (π/2 radians)
-        vec2 rotateUV(vec2 uv, float angle) {
-          float mid = 0.5;
-          uv -= mid;
-          mat2 rot = mat2(cos(angle), -sin(angle), 
-                         sin(angle), cos(angle));
-          uv = rot * uv;
-          uv += mid;
-          return uv;
-        }
-        
-        vec3 bufferAGradient(vec2 uv) {
-          float falloff = max(0.0, 1.0 - pow(32.0 * abs(0.5 - uv.x), 0.15));
-          return vec3(0.25, 0.6, 1.5) * falloff * 2.0;
-        }
-        
-        vec3 bolt(vec2 uv, float speed, float freq) {
-          vec3 col = vec3(0.0);
-          for (float i=0.0; i<0.05; i+=0.01) {
-            vec2 nuv = uv;
-            nuv.x += 0.25*(0.5-texture(uChannel1,vec2((uTime - i) * speed, nuv.y * freq)).x)*pow(0.5-abs(0.5-uv.y),0.5);
-            col += 0.7*bufferAGradient(nuv);
-          }
-          return col;
-        }
-        
-        vec3 lightningEffect(vec2 uv) {
-          // Apply 90 degree rotation to UV coordinates
-          vec2 rotatedUV = rotateUV(uv + .3, 0.); // 1.5708 radians = 90 degrees
-          vec3 col = vec3(0.0);
-          col += bolt(rotatedUV, 0.53534, 0.21);
-          col += bolt(rotatedUV, 0.64563, 0.22);
-          col += bolt(rotatedUV, 0.73425, 0.23);
-          return col;
-        }
+          ${fragmentShaderFn}
+
           ${shader.fragmentShader}
         `.replace(
           'vec4 diffuseColor = vec4( diffuse, opacity );',
@@ -140,7 +107,7 @@ export const ShaderMaterial = ({ material }: { material: THREE.MeshStandardMater
 
   useEffect(()=>{
     const fadeOut = () => {
-      effectIntensity.current = Math.max(0, effectIntensity.current - 0.010);
+      effectIntensity.current = Math.max(0, effectIntensity.current - 0.08);
       // console.log("Effect intensity", effectIntensity.current);
       if (effectIntensity.current > 0) {
         requestAnimationFrame(fadeOut);
@@ -150,12 +117,12 @@ export const ShaderMaterial = ({ material }: { material: THREE.MeshStandardMater
     const handleScroll = () => {
       scrollProgress.current = Math.min(window.scrollY / (window.innerHeight * 10), 1.0);
      
-      if (scrollProgress.current > 0.1082 &&  scrollProgress.current <1.14) {
+      if (scrollProgress.current > 0.1082 &&  scrollProgress.current <1.12) {
         effectIntensity.current = 1;
     
         setTimeout(() => {
           fadeOut();
-        }, 500);
+        }, 800);
       } else {
         effectIntensity.current = 0;
       }
