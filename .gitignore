@@ -28,7 +28,7 @@ dist-ssr
 src/components/Model/Model_.tsx
 src/components/Model/ModelWithShaderEffect.tsx
 
-src/shaders/ShaderMaterial*.tsx
+src/shaders/ShaderMaterial_*.tsx
 
 public/model/monster_white.glb
 public/model/monster_energy.glb
