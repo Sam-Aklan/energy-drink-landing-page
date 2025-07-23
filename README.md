@@ -9,6 +9,7 @@ This project features:
 - ⚡ A dynamic **thunderbolt shader effect** applied to the can on scroll interaction.
 
 ---
+## 📹 Video Preview
 
 ## 🔧 Tech Stack
 
