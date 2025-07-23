@@ -10,6 +10,7 @@ This project features:
 
 ---
 ## 📹 Video Preview
+https://github.com/user-attachments/assets/2cbcf1dc-ff33-4833-8276-0dfdf48ef1d9 
 
 ## 🔧 Tech Stack
 
