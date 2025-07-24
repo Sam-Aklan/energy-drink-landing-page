@@ -10,8 +10,7 @@ import { useEffect, useState, type RefObject } from 'react';
 gsap.registerPlugin(useGSAP,ScrollTrigger,SplitText);
 
 const Intro = ({audioRef,hasPlayedOnce}:{audioRef: RefObject<HTMLAudioElement | null>, hasPlayedOnce:boolean}) => {
-  const [currentProgress, setCurrentProgress] = useState(0)
-  const [previousProgress, setPreviousProgress] = useState(0)
+const [audioDuration, setAudioDuration] = useState(0);
  
   
   const options = {duration:1,ease:'power3.out',stagger:.025};
@@ -35,6 +34,14 @@ const Intro = ({audioRef,hasPlayedOnce}:{audioRef: RefObject<HTMLAudioElement | 
     }
   ]
 
+  useEffect(()=>{
+    const LoadedMetadatahndl = () => {
+     if(audioRef.current) setAudioDuration(audioRef.current.duration)
+      
+    };
+    audioRef.current?.addEventListener("loadedmetadata",LoadedMetadatahndl);
+    return ()=> audioRef.current?.removeEventListener("loadedmetadata",LoadedMetadatahndl)
+  },[])
   useGSAP(()=>{
     const header1Split = new SplitText('.header-1 h1',{
       type:"chars",
@@ -112,11 +119,28 @@ const Intro = ({audioRef,hasPlayedOnce}:{audioRef: RefObject<HTMLAudioElement | 
         })
         // sound animation
         // console.log("current progress",progress)
-        setCurrentProgress(progress)
-        setTimeout(()=> setPreviousProgress(progress),800)
-        if (audioRef.current && progress > 0 && currentProgress === previousProgress) {
-          if(!audioRef.current.played.length || audioRef.current.ended)audioRef.current.play();
         
+        if (audioRef.current && audioDuration > 0) {
+          // Calculate the corresponding audio time based on scroll progress
+          const audioTime = progress * audioDuration;
+          
+          // Only update if the difference is significant to avoid audio glitches
+          if (Math.abs(audioRef.current.currentTime - audioTime) > 0.05) {
+            audioRef.current.currentTime = audioTime;
+          }
+          
+          // Ensure audio is playing (might be blocked by browser autoplay policies)
+          if (audioRef.current && progress > 0) {
+            console.log("playing area")
+            audioRef.current.play().catch(e => console.log("Autoplay prevented:", e));
+          }
+        }
+      },
+      onToggle:({progress, isActive})=>{
+        if (audioRef.current && isActive) {
+          audioRef.current.play().catch(e => console.log("Play prevented:", e));
+        } else if (audioRef.current) {
+          audioRef.current.pause();
         }
       }
     })

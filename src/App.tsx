@@ -58,7 +58,7 @@ function App() {
   <>
   <ReactLenis root options={{autoRaf:false,lerp:0.5}} ref={lenisRef}>
   <Intro audioRef={audioRef} hasPlayedOnce/>
-  <audio src='/model/electricity-glitch.mp3' ref={audioRef}/>
+  <audio src='/model/electric-drum.mp3' ref={audioRef}/>
   </ReactLenis>
   </>
   
