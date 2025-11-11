@@ -42,6 +42,7 @@ const [audioDuration, setAudioDuration] = useState(0);
     audioRef.current?.addEventListener("loadedmetadata",LoadedMetadatahndl);
     return ()=> audioRef.current?.removeEventListener("loadedmetadata",LoadedMetadatahndl)
   },[])
+
   useGSAP(()=>{
     const header1Split = new SplitText('.header-1 h1',{
       type:"chars",
@@ -137,9 +138,10 @@ const [audioDuration, setAudioDuration] = useState(0);
         }
       },
       onToggle:({progress, isActive})=>{
+        
         if (audioRef.current && isActive) {
           audioRef.current.play().catch(e => console.log("Play prevented:", e));
-        } else if (audioRef.current) {
+        } else if (audioRef.current && !isActive) {
           audioRef.current.pause();
         }
       }

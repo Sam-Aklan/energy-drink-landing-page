@@ -14,9 +14,7 @@ const Scene = () => {
         aspect={window.innerWidth / window.innerHeight}
       
       />
-      {/* <Model/> */}
-      {/* <Model/> */}
-      {/* <Model/> */}
+    
       <Model/>
     </>
   );
